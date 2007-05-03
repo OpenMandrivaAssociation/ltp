@@ -1,6 +1,6 @@
 %define name ltp
-%define srcver 20050707
-%define release 1mdk
+%define srcver 20070430
+%define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
 %define _provides_exceptions perl(.*)
@@ -10,7 +10,7 @@ Name: %{name}
 Version: 0.%srcver
 Release: %{release}
 Epoch: 1
-Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tar.bz2
+Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tgz
 License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
@@ -75,7 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ChangeLog CREDITS doc/*.txt
 %doc doc/examples doc/*.lyx
 %doc doc/testcases
-%_bindir/*
 %_libdir/ltp
 %_mandir/man1/*
 %_mandir/man3/*
