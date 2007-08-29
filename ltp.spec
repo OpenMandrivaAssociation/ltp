@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20070430
+%define srcver 20070731
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
@@ -15,7 +15,7 @@ License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
 BuildRoot: %{_tmppath}/%{name}-buildroot
-BuildRequires: flex rsync
+BuildRequires: flex glibc-static-devel rsync
 Url: http://ltp.sourceforge.net/
 
 %description
@@ -47,6 +47,7 @@ mkdir -p $RPM_BUILD_ROOT%_mandir/man3/
 
 mkdir -p $RPM_BUILD_ROOT%_bindir
 
+cp -p ChangeLog $RPM_BUILD_ROOT%_libdir/ltp
 cp -p runltp *.sh $RPM_BUILD_ROOT%_libdir/ltp
 cp -p ltpmenu $RPM_BUILD_ROOT%_libdir/ltp
 cp -p ver_linux $RPM_BUILD_ROOT%_libdir/ltp
@@ -63,7 +64,6 @@ find testcases -type f | xargs perl -p -i -e 's@/usr/local/bin/perl5@/usr/bin/pe
 
 %makeinstall
 
-#tar c `find testcases/bin -type f | fgrep -v CVS` | tar x -C $RPM_BUILD_ROOT%_libdir/ltp
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile tools/ $RPM_BUILD_ROOT%_libdir/ltp/tools
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile testcases/ $RPM_BUILD_ROOT%_libdir/ltp/testcases
 
@@ -72,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc README ChangeLog CREDITS doc/*.txt
+%doc README CREDITS doc/*.txt
 %doc doc/examples doc/*.lyx
 %doc doc/testcases
 %_libdir/ltp
