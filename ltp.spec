@@ -14,7 +14,6 @@ Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tgz
 License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
-BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: flex glibc-static-devel rsync
 Url: http://ltp.sourceforge.net/
 
