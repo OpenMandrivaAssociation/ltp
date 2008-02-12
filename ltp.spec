@@ -22,7 +22,7 @@ Url: http://ltp.sourceforge.net/
 The Linux Test Project is a joint project with SGI, IBM, OSDL, and Bull with a
 goal to deliver test suites to the open source community that validate the 
 reliability, robustness, and stability of Linux. The Linux Test Project is a 
-collection of tools for testing the Linux kernel and related features. Our goal 
+collection of tools for testing the Linux kernel and related features. Our goal
 is to improve the Linux kernel by bring test automation to the kernel testing 
 effort. Interested open source contributors are encouraged to join the project.
 
