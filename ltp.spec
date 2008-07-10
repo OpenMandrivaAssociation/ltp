@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20080331
+%define srcver 20080630
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
@@ -62,7 +62,22 @@ cp -p $RPM_BUILD_DIR/%name-full-%srcver/doc/man3/* $RPM_BUILD_ROOT%_mandir/man3/
 perl -p -i -e 's/whoami.*/true/' `find . -name \*.sh`
 find testcases -type f | xargs perl -p -i -e 's@/usr/local/bin/perl5@/usr/bin/perl@'
 
-%makeinstall
+# trem: fix path in lib/Makefile
+perl -i -pe 's|DESTDIR=/opt/ltp|DESTDIR=%{buildroot}%{_prefix}|g' lib/Makefile
+perl -i -pe 's|/usr/share/pkgconfig/ltp.pc|%{buildroot}/usr/share/pkgconfig/ltp.pc|g' lib/Makefile
+perl -i -pe 's|/lib/|/%{_lib}/|g' lib/Makefile
+
+# trem: fix path in include/Makefile
+perl -i -pe 's|DESTDIR=/opt/ltp|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' include/Makefile
+
+# trem: fix path in pan/Makefile
+perl -i -pe 's|DESTDIR = /opt/ltp|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' pan/Makefile
+
+# trem: fix path in doc/man1/Makefile and doc/man3/Makefile
+perl -i -pe 's|DESTDIR=/usr|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' doc/man1/Makefile
+perl -i -pe 's|DESTDIR=/usr|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' doc/man3/Makefile
+
+%makeinstall 
 
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile tools/ $RPM_BUILD_ROOT%_libdir/ltp/tools
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile testcases/ $RPM_BUILD_ROOT%_libdir/ltp/testcases
@@ -75,7 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc README CREDITS doc/*.txt
 %doc doc/examples doc/*.lyx
 %doc doc/testcases
+%_datadir/pkgconfig/%{name}.pc
 %_libdir/ltp
+%_libdir/libltp.a
 %_mandir/man1/*
 %_mandir/man3/*
-
