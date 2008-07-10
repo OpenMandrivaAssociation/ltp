@@ -11,6 +11,7 @@ Version: 0.%srcver
 Release: %{release}
 Epoch: 1
 Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tgz
+Patch0:  add_limits_h_to_hackbench_c.patch
 License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
@@ -29,6 +30,7 @@ effort. Interested open source contributors are encouraged to join the project.
 %prep
 rm -rf $RPM_BUILD_ROOT
 %setup -q -n %name-full-%srcver
+%patch0 -p1
 
 %build
 perl -p -i -e 's/@\.\/IDcheck\.sh//' Makefile
