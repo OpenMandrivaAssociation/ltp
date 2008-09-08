@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20080731
+%define srcver 20080831
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
