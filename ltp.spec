@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20080831
+%define srcver 20081031
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
@@ -11,8 +11,6 @@ Version: 0.%srcver
 Release: %{release}
 Epoch: 1
 Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tgz
-Patch0:  add_limits_h_to_hackbench_c.patch
-Patch1:  fix_dirent_h.patch
 License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
@@ -31,8 +29,6 @@ effort. Interested open source contributors are encouraged to join the project.
 %prep
 rm -rf $RPM_BUILD_ROOT
 %setup -q -n %name-full-%srcver
-%patch0 -p1
-%patch1 -p1
 
 %build
 perl -p -i -e 's/@\.\/IDcheck\.sh//' Makefile
@@ -67,21 +63,21 @@ perl -p -i -e 's/whoami.*/true/' `find . -name \*.sh`
 find testcases -type f | xargs perl -p -i -e 's@/usr/local/bin/perl5@/usr/bin/perl@'
 
 # trem: fix path in lib/Makefile
-perl -i -pe 's|DESTDIR=/opt/ltp|DESTDIR=%{buildroot}%{_prefix}|g' lib/Makefile
+perl -i -pe 's|PREFIX=/opt/ltp|PREFIX=%{buildroot}%{_prefix}|g' lib/Makefile
 perl -i -pe 's|/usr/share/pkgconfig/ltp.pc|%{buildroot}/usr/share/pkgconfig/ltp.pc|g' lib/Makefile
-perl -i -pe 's|/lib/|/%{_lib}/|g' lib/Makefile
+perl -i -pe 's|/lib\$\(LIBSUFFIX\)/|/%{_lib}/|g' lib/Makefile
 
 # trem: fix path in include/Makefile
-perl -i -pe 's|DESTDIR=/opt/ltp|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' include/Makefile
+perl -i -pe 's|PREFIX=/opt/ltp|PREFIX=%{buildroot}%{_libdir}/%{name}|g' include/Makefile
 
 # trem: fix path in pan/Makefile
-perl -i -pe 's|DESTDIR = /opt/ltp|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' pan/Makefile
+perl -i -pe 's|PREFIX = /opt/ltp|PREFIX=%{buildroot}%{_libdir}/%{name}|g' pan/Makefile
 
 # trem: fix path in doc/man1/Makefile and doc/man3/Makefile
-perl -i -pe 's|DESTDIR=/usr|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' doc/man1/Makefile
-perl -i -pe 's|DESTDIR=/usr|DESTDIR=%{buildroot}%{_libdir}/%{name}|g' doc/man3/Makefile
+perl -i -pe 's|PREFIX=/usr|PREFIX=%{buildroot}%{_libdir}/%{name}|g' doc/man1/Makefile
+perl -i -pe 's|PREFIX=/usr|PREFIX=%{buildroot}%{_libdir}/%{name}|g' doc/man3/Makefile
 
-%makeinstall 
+%makeinstall
 
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile tools/ $RPM_BUILD_ROOT%_libdir/ltp/tools
 rsync -ar --exclude="*.c" --exclude="*.h" --exclude=Makefile testcases/ $RPM_BUILD_ROOT%_libdir/ltp/testcases
