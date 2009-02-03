@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20081031
+%define srcver 20090131
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
@@ -76,6 +76,9 @@ perl -i -pe 's|PREFIX = /opt/ltp|PREFIX=%{buildroot}%{_libdir}/%{name}|g' pan/Ma
 # trem: fix path in doc/man1/Makefile and doc/man3/Makefile
 perl -i -pe 's|PREFIX=/usr|PREFIX=%{buildroot}%{_libdir}/%{name}|g' doc/man1/Makefile
 perl -i -pe 's|PREFIX=/usr|PREFIX=%{buildroot}%{_libdir}/%{name}|g' doc/man3/Makefile
+
+# trem: fix path in m4/GNUmakefiles
+perl -i -pe 's|PREFIX=/opt/ltp|PREFIX=%{buildroot}%{_libdir}/%{name}|g' m4/GNUmakefile
 
 %makeinstall
 
