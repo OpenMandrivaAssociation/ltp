@@ -16,6 +16,7 @@ Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: flex glibc-static-devel rsync
+BuildRequires: zip
 Url: http://ltp.sourceforge.net/
 
 %description
