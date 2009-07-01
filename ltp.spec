@@ -1,5 +1,5 @@
 %define name ltp
-%define srcver 20090430
+%define srcver 20090630
 %define release %mkrel 1
 
 %define _requires_exceptions perl(.*)
@@ -52,7 +52,7 @@ cp -p ChangeLog $RPM_BUILD_ROOT%_libdir/ltp
 cp -p runltp *.sh $RPM_BUILD_ROOT%_libdir/ltp
 cp -p ltpmenu $RPM_BUILD_ROOT%_libdir/ltp
 cp -p ver_linux $RPM_BUILD_ROOT%_libdir/ltp
-cp -p pan/{bump,pan,scanner} $RPM_BUILD_ROOT%_libdir/ltp/pan
+cp -p pan/{ltp-bump,ltp-pan,ltp-scanner} $RPM_BUILD_ROOT%_libdir/ltp/pan
 cp -p pan/cgi/*.cgi $RPM_BUILD_ROOT%_libdir/ltp/pan/cgi
 cp -p runtest/[a-z]* $RPM_BUILD_ROOT%_libdir/ltp/runtest
 cp -p testscripts/*.sh $RPM_BUILD_ROOT%_libdir/ltp/testscripts
