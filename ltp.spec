@@ -7,7 +7,7 @@
 
 Summary: Linux Test Project
 Name: %{name}
-Version: 0.%srcver
+Version: 0.20091031
 Release: %{release}
 Epoch: 1
 Source0: http://prdownloads.sourceforge.net/ltp/%{name}-full-%{srcver}.tgz
