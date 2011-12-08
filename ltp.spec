@@ -57,8 +57,8 @@ cp -p pan/cgi/*.cgi $RPM_BUILD_ROOT%_libdir/ltp/pan/cgi
 cp -p runtest/[a-z]* $RPM_BUILD_ROOT%_libdir/ltp/runtest
 cp -p testscripts/*.sh $RPM_BUILD_ROOT%_libdir/ltp/testscripts
 
-cp -p $RPM_BUILD_DIR/%name-full-%srcver/doc/man1/* $RPM_BUILD_ROOT%_mandir/man1/
-cp -p $RPM_BUILD_DIR/%name-full-%srcver/doc/man3/* $RPM_BUILD_ROOT%_mandir/man3/
+cp -p %{_builddir}/%name-full-%srcver/doc/man1/* $RPM_BUILD_ROOT%_mandir/man1/
+cp -p %{_builddir}/%name-full-%srcver/doc/man3/* $RPM_BUILD_ROOT%_mandir/man3/
 
 perl -p -i -e 's/whoami.*/true/' `find . -name \*.sh`
 find testcases -type f | xargs perl -p -i -e 's@/usr/local/bin/perl5@/usr/bin/perl@'
