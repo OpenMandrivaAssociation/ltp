@@ -1,0 +1,81 @@
+--- ltp-full-20120903/testcases/kernel/io/aio/aio01/aio01.c.printf	2012-09-03 08:39:27.000000000 +0400
++++ ltp-full-20120903/testcases/kernel/io/aio/aio01/aio01.c	2012-12-03 17:31:31.267975381 +0400
+@@ -122,7 +122,7 @@ int main(int argc, char **argv)
+ 	bufsize = (bflag ? atoi(optb):8192);
+ 	nr = (nflag ? atoi(optn):10);
+ 	if (Fflag) {
+-		sprintf(fname, optF);
++		sprintf(fname, "%s", optF);
+ 	} else {
+ 		sprintf(fname, "aiofile");
+ 	}
+@@ -433,4 +433,4 @@ int main(void)
+   tst_exit();
+ }
+ 
+-#endif
+\ No newline at end of file
++#endif
+--- ltp-full-20120903/testcases/network/lib6/asapi_05.c.printf	2012-09-03 08:39:26.000000000 +0400
++++ ltp-full-20120903/testcases/network/lib6/asapi_05.c	2012-12-03 16:46:56.270831965 +0400
+@@ -398,8 +398,8 @@ icmp6_ft(void)
+ 			tst_resm(TFAIL, "%s: rv %d != expected %d",
+ 				ftab[i].ft_tname, rv, ftab[i].ft_expected);
+ 		else
+-			tst_resm(TPASS, ftab[i].ft_tname);
++			tst_resm(TPASS, "%s", ftab[i].ft_tname);
+ 	}
+ }
+ 
+-int TST_TOTAL = ETCOUNT;
+\ No newline at end of file
++int TST_TOTAL = ETCOUNT;
+--- ltp-full-20120903/testcases/network/nfsv4/acl/acl1.c.printf	2012-09-03 08:39:26.000000000 +0400
++++ ltp-full-20120903/testcases/network/nfsv4/acl/acl1.c	2012-12-03 16:46:56.270831965 +0400
+@@ -325,7 +325,7 @@ void test_acl_default(char * dir, acl_t
+ 	char * cmd=malloc(256);
+ 
+         strcpy(cmd, "chmod 7777 ");
+-	printf(cmd);
++	printf("%s", cmd);
+         strcat(cmd,dir);
+         system(cmd);
+ 	acl2 = acl_get_file(path,ACL_TYPE_ACCESS);
+--- ltp-full-20120903/tools/apicmds/ltpapicmd.c.printf	2012-09-03 08:39:28.000000000 +0400
++++ ltp-full-20120903/tools/apicmds/ltpapicmd.c	2012-12-03 16:46:56.271832077 +0400
+@@ -207,7 +207,7 @@ int main( int argc,
+         file_name = argv++[0];
+         argv++;
+         strcpy(arg_fmt, *argv);
+-        tst_brk(trestype, file_name, NULL, arg_fmt);
++        tst_brk(trestype, "%s", file_name, NULL, arg_fmt);
+     }
+     else
+     if (strcmp(cmd_name, "tst_res") == 0)
+@@ -224,7 +224,7 @@ int main( int argc,
+         trestype = ident_ttype(argv++[0]);
+         file_name = argv++[0];
+         strcpy(arg_fmt, *argv);
+-        tst_res(trestype, file_name, arg_fmt);
++        tst_res(trestype, "%s", file_name, arg_fmt);
+     }
+     else
+     if (strcmp(cmd_name, "tst_brkm") == 0)
+@@ -241,7 +241,7 @@ int main( int argc,
+         trestype = ident_ttype(argv++[0]);
+         argv++;
+         strcpy(arg_fmt, *argv);
+-        tst_brkm(trestype, NULL, arg_fmt);
++        tst_brkm(trestype, "%s", NULL, arg_fmt);
+     }
+     else
+     if (strcmp(cmd_name, "tst_resm") == 0)
+@@ -256,7 +256,7 @@ int main( int argc,
+         }
+         trestype = ident_ttype(argv++[0]);
+         strcpy(arg_fmt, *argv);
+-        tst_resm(trestype, arg_fmt);
++        tst_resm(trestype, "%s", arg_fmt);
+     }
+     else
+     if (strcmp(cmd_name, "tst_exit") == 0)
