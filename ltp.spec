@@ -3,7 +3,7 @@
 Summary: Linux Test Project
 Name:    ltp
 Version: 0.%{srcver}
-Release: 1
+Release: 2
 source0: http://downloads.sourceforge.net/project/%{name}/LTP%20Source/%{name}-%{srcver}/%{name}-full-%{srcver}.bz2
 patch0:  ltp-full-20120903.printf.patch
 License: GPL
