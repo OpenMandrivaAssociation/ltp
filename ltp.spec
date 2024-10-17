@@ -11,7 +11,7 @@ Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
 BuildRequires: flex glibc-static-devel rsync
 BuildRequires: zip
-Url: http://ltp.sourceforge.net/
+Url: https://ltp.sourceforge.net/
 
 %description
 The Linux Test Project is a joint project with SGI, IBM, OSDL, and Bull with a
