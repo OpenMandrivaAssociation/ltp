@@ -9,6 +9,11 @@ patch0:  ltp-full-20120903.printf.patch
 License: GPL
 Group: Development/Kernel
 Requires: /usr/bin/ar /usr/bin/objdump gcc cdialog /usr/bin/ld /usr/bin/ldd tar
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: flex glibc-static-devel rsync
 BuildRequires: zip
 Url: https://ltp.sourceforge.net/
